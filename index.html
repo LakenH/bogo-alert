@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>What's BOGO?</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script
-			  src="https://code.jquery.com/jquery-3.4.1.min.js"
-			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar has-background-link" role="navigation" aria-label="main navigation">
@@ -49,19 +46,20 @@
             var date_start = element.date_start;
             var date_end = element.date_end;
 
-            var template = `<div class="column is-one-fifth">
-            <div class="card">
-              <div class="card-content has-text-centered">
-                <p class="name">${product}</p>
-                <div class="terms">
-                  <p>${deal_type}</p>
-                  <p class="is-size-7">${terms}</p>
+            var template = 
+            `<div class="column is-one-fifth">
+                <div class="card">
+                  <div class="card-content has-text-centered">
+                    <p class="name">${product}</p>
+                    <div class="terms">
+                      <p>${deal_type}</p>
+                      <p class="is-size-7">${terms}</p>
+                    </div>
+                    <p class="dates">Valid: ${date_start} - ${date_end}</p>
+                  </div>
                 </div>
-                <p class="dates">Valid: ${date_start} - ${date_end}</p>
-              </div>
-            </div>
-          </div>`;
-            // console.log(element.product);
+              </div>`;
+              
             $('#items').append(template);
           });
 
