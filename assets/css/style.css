@@ -2408,3 +2408,5 @@ img.logo { padding: 5px; }
 .dates { margin-top: auto; font-weight: 500; }
 
 .name { font-weight: 500; font-size: 1.2rem; color: #1d227e; }
+
+.card { min-width: 100%; }
