@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What's BOGO?</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar has-background-link" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand has-background-primary">
+        <a class="navbar-item" href="/">
+          <img src="assets/img/brand-mark-rev.png" alt="BogoAlert" class="logo" width="auto" height="auto">
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-item">
+          <h1>Current Publix BOGO Offers</h1>
+        </div>
+      </div>
+    </nav>
+    <section class="main">
+      <div class="container">
+        <div class="columns is-multiline" id="items">
+        </div>
+      </div>
+    </section>
+    <script>
+      $.ajax({
+          url: "https://wrapapi.com/use/laken/publix/bogos/0.0.5",
+          method: "POST",
+          data: {
+            "wrapAPIKey": "K9U1HEqiH7upc4d7kCZHG9A8NIlw3ywc"
+          }
+        }).done(function(data) {
+          console.log(data);
+          
+          const offers = JSON.parse(JSON.stringify(data));
+          console.log(offers.data.offer)
+          offers.data.offer.forEach(function(element) {
+            var product = element.product;
+            var deal_type = element.deal_type;
+            var terms = element.terms;
+            var date_start = element.date_start;
+            var date_end = element.date_end;
+
+            var template = `<div class="column is-one-fifth">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <p class="name">${product}</p>
+                <div class="terms">
+                  <p>${deal_type}</p>
+                  <p class="is-size-7">${terms}</p>
+                </div>
+                <p class="dates">Valid: ${date_start} - ${date_end}</p>
+              </div>
+            </div>
+          </div>`;
+            // console.log(element.product);
+            $('#items').append(template);
+          });
+
+        });
+    </script>
+  </body>
+</html>
