@@ -29,7 +29,7 @@
     </section>
     <script>
       $.ajax({
-          url: "https://wrapapi.com/use/laken/publix/bogos/0.0.5",
+          url: "https://wrapapi.com/use/laken/publix/bogos/0.0.9",
           method: "POST",
           data: {
             "wrapAPIKey": "K9U1HEqiH7upc4d7kCZHG9A8NIlw3ywc"
@@ -45,12 +45,17 @@
             var terms = element.terms;
             var date_start = element.date_start;
             var date_end = element.date_end;
+            var img = element.img;
+            if (img == null) { img = "assets/img/bogo.png"; } else {
+              img = "https://" + element.img;
+            }
 
             var template = 
             `<div class="column is-one-fifth">
                 <div class="card">
                   <div class="card-content has-text-centered">
                     <p class="name">${product}</p>
+                    <img src="${img}"/>
                     <div class="terms">
                       <p>${deal_type}</p>
                       <p class="is-size-7">${terms}</p>
