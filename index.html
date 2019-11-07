@@ -29,11 +29,9 @@
     </section>
     <script>
       $.ajax({
-          url: "https://wrapapi.com/use/laken/publix/bogos/0.0.9",
+          url: "https://cron.w3ez.com/publix_bogos.json",
           method: "POST",
-          data: {
-            "wrapAPIKey": "K9U1HEqiH7upc4d7kCZHG9A8NIlw3ywc"
-          }
+          data: {}
         }).done(function(data) {
           console.log(data);
           
@@ -46,7 +44,7 @@
             var date_start = element.date_start;
             var date_end = element.date_end;
             var img = element.img;
-            if (img == null) { img = "assets/img/bogo.png"; } else {
+            if (img == null) { img = "assets/img/placeholder.png"; } else {
               img = "https://" + element.img;
             }
 
@@ -64,7 +62,7 @@
                   </div>
                 </div>
               </div>`;
-              
+
             $('#items').append(template);
           });
 
