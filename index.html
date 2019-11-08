@@ -38,9 +38,6 @@
       </div>
     </footer>
     <script>
-      if((window.location.protocol != 'https:') & (location.href.includes('localhost') == false)) {
-        location.href =   location.href.replace("http://", "https://");
-      }
       $.ajax({
           url: "https://cron.w3ez.com/publix_bogos.json",
           method: "POST",
