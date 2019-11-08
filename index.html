@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#009900">
+    <link rel="icon" sizes="192x192" href="assets/icon.png">
     <title>What's BOGO?</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -32,10 +34,13 @@
     <footer class="footer">
       <div class="content has-text-centered">
         <p>BOGOAlert has no affiliation with Publix Super Markets, Inc.</p>
-        <p>&copy;<strong>BOGOAlert</strong> by <a href="https://laken.net">Laken Hafner</a></p>
+        <p>&copy; BOGOAlert by <a href="https://laken.net">Laken Hafner</a></p>
       </div>
     </footer>
     <script>
+      if((window.location.protocol != 'https:') & (location.href.includes('localhost') == false)) {
+        location.href =   location.href.replace("http://", "https://");
+      }
       $.ajax({
           url: "https://cron.w3ez.com/publix_bogos.json",
           method: "POST",
