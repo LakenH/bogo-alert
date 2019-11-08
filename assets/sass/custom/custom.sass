@@ -22,6 +22,10 @@ img.logo
     height: 100%
     display: flex
     flex-direction: column
+
+    img
+        width: 75%
+        align-self: center
 .dates
     margin-top: auto
     font-weight: 500
@@ -34,5 +38,14 @@ img.logo
 .card
     min-width: 100%
 
+@media (max-width: $tablet)
+    .card
+        min-width: 90%
+        max-width: 90%
+        margin: auto
+    .navbar-brand .navbar-item
+        margin: auto
+
 body 
     background: #f9f9f9
+
