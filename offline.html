@@ -35,26 +35,22 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-item">
-          <h1>Current Publix BOGO Offers</h1>
+          <h1>No Network Connection</h1>
         </div>
       </div>
     </nav>
     <section class="main">
       <div class="container">
-        <h1 class="is-hidden-desktop is-size-4 has-text-centered">Current Publix BOGO Offers</h1>
+        <h1 class="is-hidden-desktop is-size-4 has-text-centered">No Network Connection</h1>
         <br>
-        <div class="columns is-multiline" id="items">
-        </div>
+        <p class=" has-text-centered">It appears that you are offline! Unforutnately, you require an internet connection in order to check for the most recent BOGO offers available.</p>
       </div>
     </section>
     <footer class="footer">
-      <div class="content has-text-centered">
-        <p>BOGOAlert has no affiliation with Publix Super Markets, Inc.</p>
-        <p>&copy; BOGOAlert by <a href="https://laken.net">Laken Hafner</a></p>
-      </div>
+        
     </footer>
     <script>
-      // This is the "Offline page" service worker
+      // This is the service worker with the Advanced caching
 
       // Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
 
@@ -74,48 +70,6 @@
         }
       }
 
-
-    </script>
-    <script>
-      $.ajax({
-          url: "https://cron.w3ez.com/publix_bogos.json",
-          method: "POST",
-          data: {}
-        }).done(function(data) {
-          console.log(data);
-          
-          const offers = JSON.parse(JSON.stringify(data));
-          console.log(offers.data.offer)
-          offers.data.offer.forEach(function(element) {
-            var product = element.product;
-            var deal_type = element.deal_type;
-            var terms = element.terms;
-            var date_start = element.date_start;
-            var date_end = element.date_end;
-            var img = element.img;
-            if (img == null) { img = "assets/img/placeholder.png"; } else {
-              img = "https://" + element.img;
-            }
-
-            var template = 
-            `<div class="column is-one-fifth">
-                <div class="card">
-                  <div class="card-content has-text-centered">
-                    <p class="name">${product}</p>
-                    <img src="${img}"/>
-                    <div class="terms">
-                      <p>${deal_type}</p>
-                      <p class="is-size-7">${terms}</p>
-                    </div>
-                    <p class="dates">Valid: ${date_start} - ${date_end}</p>
-                  </div>
-                </div>
-              </div>`;
-
-            $('#items').append(template);
-          });
-
-        });
     </script>
   </body>
 </html>
