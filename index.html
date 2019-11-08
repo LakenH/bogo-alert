@@ -23,10 +23,18 @@
     </nav>
     <section class="main">
       <div class="container">
+        <h1 class="is-hidden-desktop is-size-4 has-text-centered">Current Publix BOGO Offers</h1>
+        <br>
         <div class="columns is-multiline" id="items">
         </div>
       </div>
     </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>BOGOAlert has no affiliation with Publix Super Markets, Inc.</p>
+        <p>&copy;<strong>BOGOAlert</strong> by <a href="https://laken.net">Laken Hafner</a></p>
+      </div>
+    </footer>
     <script>
       $.ajax({
           url: "https://cron.w3ez.com/publix_bogos.json",
