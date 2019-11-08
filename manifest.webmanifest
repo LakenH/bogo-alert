@@ -1,15 +1,15 @@
 {
 	"dir" : "ltr",
-	"lang" : "en",
+	"lang" : "English",
 	"name" : "BOGOs for Publix",
 	"scope" : "/",
-	"display" : "browser",
+	"display" : "standalone",
 	"start_url" : "https://publix.bogoalert.com/",
 	"short_name" : "Publix BOGO",
 	"theme_color" : "#009900",
 	"description" : "Find out what is BOGO (Buy-One-Get-One) at Publix Super Market stores.",
 	"orientation" : "any",
-	"background_color" : "transparent",
+	"background_color" : "pick",
 	"related_applications" : "",
 	"prefer_related_applications" : "false",
 	"icons" : [
@@ -18,5 +18,5 @@
 			"sizes": "512x512"
 		}],
 	"screenshots" : [],
-	"generated" : "true"
+	"generated" : "undefined"
 }
