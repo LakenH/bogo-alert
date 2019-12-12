@@ -37,26 +37,35 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   </head>
-  <body style="background:#fff;">
-      <nav class="navbar has-background-link" role="navigation" aria-label="main navigation" style="top:-15px;height:85px;">
-          <div class="navbar-brand has-background-primary" style="padding-top:25px;">
-            <a class="navbar-item" href="#">
-              <img src="assets/img/brand-mark-rev.png" alt="BogoAlert" class="logo" width="auto" height="auto">
-            </a>
-          </div>
-          <div class="navbar-menu" style="margin-top:20px;">
-            <div class="navbar-item">
-              <!-- <h1>Current Publix BOGO Offers</h1> -->
-            </div>
-          </div>
-        </nav>
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar has-background-link is-fixed-top" role="navigation" aria-label="main navigation" style="top:-15px;height:85px;">
+      <div class="navbar-brand has-background-primary" style="padding-top:25px;">
+        <a class="navbar-item" href="#">
+          <img src="assets/img/brand-mark-rev.png" alt="BogoAlert" class="logo" width="auto" height="auto">
+        </a>
+      </div>
+      <div class="navbar-menu" style="margin-top:20px;">
+        <div class="navbar-item">
+          <h1>Current Publix BOGO Offers</h1>
+        </div>
+      </div>
+    </nav>
     <section class="main">
-      <div class="container has-text-centered">
-        <h1 style="font-size:40px;">Temporarily Down for Maintenance</h1>
-        <p style="font-size:20px;">Sorry for the inconvience. We'll be back soon!</p>
+      <div class="container">
+        <br>
+        <h1 class="is-hidden-desktop is-size-4 has-text-centered">Current Publix BOGO Offers</h1>
+        <br>
+        <div class="columns is-multiline" id="items">
+        </div>
       </div>
     </section>
-
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>BOGOAlert has no affiliation with Publix Super Markets, Inc.</p>
+        <p><a href="/legal.html">Privacy Policy</a> | <a href="/legal.html">Terms of Service</a></p>
+        <p>&copy;2019 BOGOAlert, All Rights Reserved.</p>
+      </div>
+    </footer>
     <script>
       // This is the "Offline page" service worker
 
@@ -79,6 +88,47 @@
       }
 
 
+    </script>
+    <script>
+      $.ajax({
+          url: "https://api.bogoalert.com/publix_bogos.json",
+          method: "POST",
+          data: {}
+        }).done(function(data) {
+          console.log(data);
+          
+          const offers = JSON.parse(JSON.stringify(data));
+          console.log(offers.data.offer)
+          offers.data.offer.forEach(function(element) {
+            var product = element.product;
+            var deal_type = element.deal_type;
+            var terms = element.terms;
+            var date_start = element.date_start;
+            var date_end = element.date_end;
+            var img = element.img;
+            if (img == null) { img = "assets/img/placeholder.png"; } else {
+              img = "https://" + element.img;
+            }
+
+            var template = 
+            `<div class="column is-one-fifth">
+                <div class="card">
+                  <div class="card-content has-text-centered">
+                    <p class="name">${product}</p>
+                    <img src="${img}"/>
+                    <div class="terms">
+                      <p>${deal_type}</p>
+                      <p class="is-size-7">${terms}</p>
+                    </div>
+                    <p class="dates">Valid: ${date_start} - ${date_end}</p>
+                  </div>
+                </div>
+              </div>`;
+
+            $('#items').append(template);
+          });
+
+        });
     </script>
   </body>
 </html>
