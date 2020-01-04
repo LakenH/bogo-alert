@@ -35,6 +35,9 @@
     <title>What's BOGO?</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
   <body class="has-navbar-fixed-top">
     <nav class="navbar has-background-link is-fixed-top" role="navigation" aria-label="main navigation" style="top:-15px;height:85px;">
@@ -51,8 +54,20 @@
     </nav>
     <section class="main">
       <div class="container">
+          <div class="columns is-centered">
+              <div class="column is-one-quarter">
+                <button id="view_list" class="button is-link has-text-centered is-size-6 is-fixed-bottom" style="position:fixed;top:90;right:0;z-index:1000; border-radius: 0;">View My Shopping List</button><br>
+                
+              
+              </div>
+            </div>
+            <div class="modal" id="list_modal">
+              
+            </div>
         <br>
         <h1 class="is-hidden-desktop is-size-4 has-text-centered">Current Publix BOGO Offers</h1>
+
+        
         <br>
         <div class="columns is-multiline" id="items">
         </div>
@@ -94,6 +109,7 @@
           method: "POST",
           data: {}
         }).done(function(data) {
+          
           console.log(data);
           const offers = JSON.parse(JSON.stringify(data));
           if (offers.success == "false") {
@@ -112,6 +128,7 @@
 
               $('#items').append(template);
           } else {
+
             console.log(offers.data.offer)
             offers.data.offer.forEach(function(element) {
               var product = element.product;
@@ -135,14 +152,64 @@
                         <p class="is-size-7">${terms}</p>
                       </div>
                       <p class="dates">Valid: ${date_start} - ${date_end}</p>
+                      <footer class="card-footer">
+                    <p class="card-footer-item">
+                      <span>
+                        <button class="button is-link list-added" data_name="${product}" data_expire="${date_end}">Add to My List</a>
+                      </span>
+                    </p>
+                  </footer>
                     </div>
-                  </div>
+                  </div>  
                 </div>`;
 
               $('#items').append(template);
             });
+
+
           }
         });
+
+        $(document).ready(function() {
+
+              var shopping_list = "<h1>Shopping List</h1><br><ul>";
+
+
+            $("#items").on("click", ".list-added", function(e){
+              e.preventDefault();
+              var target = e.target;
+              if ($(target).text() !== "Remove from My List") {
+                
+                $(target).addClass("has-background-grey");
+                shopping_list = shopping_list +  "<li><strong>" + $(target).attr("data_name") + "</strong> BOGO until " + $(target).attr("data_expire") + "</li>";
+                console.log("added");
+                $(target).text("Remove from My List");
+              } else {
+                
+                $(target).removeClass("has-background-grey");
+                shopping_list = shopping_list.replace("<li><strong>" + $(target).attr("data_name") + "</strong> BOGO until " + $(target).attr("data_expire") + "</li>", "");
+                console.log("removed");
+
+                $(target).text("Add to My List");
+              }
+
+            });
+
+            $('#view_list').click(function() {
+
+              $('#list_modal').html(shopping_list + "<ul>" + '<p><a href="#" id="remove-all">Remove All Items</a></p>');
+              $('#list_modal').modal();
+
+            });
+            $("#list_modal").on("click", "#remove-all", function(e){
+              e.preventDefault;
+              shopping_list = "<h1>Shopping List</h1><br><ul>";
+              $(".list-added").text("Add to My List");
+              $(".list-added").removeClass("has-background-grey");
+              $.modal.close();
+            });
+        });
+
     </script>
   </body>
 </html>
