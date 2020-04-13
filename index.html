@@ -112,16 +112,16 @@
           
           console.log(data);
           const offers = JSON.parse(JSON.stringify(data));
-          if (offers.success == "false") {
+          if (offers.data == null) {
             var template = 
               `<div class="column is-one-fifth">
                   <div class="card">
                     <div class="card-content has-text-centered">
-                      <p class="name">Uh oh!</p>
+                      <p class="name">No BOGOs?!</p>
                       <div class="terms">
-                        <p>We're having an issue fetching offers from their APIs</p>
+                        <p>We're having an issue fetching BOGO Offers</p>
                       </div>
-                      <p class="dates">We're working on this issue right now.<br>Please check back soon.</p>
+                      <p class="dates">This is most likely due to there being an issue with the Publix Database.<br>Please check back soon.</p>
                     </div>
                   </div>
                 </div>`;
